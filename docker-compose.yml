@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   app:
     image: lscr.io/linuxserver/code-server
@@ -9,21 +8,20 @@ services:
       - TZ=Europe/Berlin
       - DEFAULT_WORKSPACE=/files
       - PASSWORD
+      - CADDY_DOMAIN=${CADDY_DOMAIN}
+      - CADDY_TYPE=${CADDY_TYPE:-internal}
+      - CADDY_PORT=${CADDY_PORT:-8443}
     volumes:
       - smarthome_app_conf:/files/homeassistant
       - app_conf:/config
       - $PWD/..:/files/services
     networks:
-      proxy_apps:
+      - caddy
 
 networks:
-  proxy_apps:
-    name: proxy_apps
-    external: true
+  caddy:
 
 volumes:
   app_conf:
   smarthome_app_conf:
-    external: true
-  proxy_app_hosts:
     external: true
