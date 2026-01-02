@@ -7,10 +7,11 @@ services:
       - PGID=1000
       - TZ=Europe/Berlin
       - DEFAULT_WORKSPACE=/files
-      - PASSWORD
+      - PASSWORD=${PASSWORD:-}
       - CADDY_DOMAIN=${CADDY_DOMAIN}
       - CADDY_TYPE=${CADDY_TYPE:-internal}
       - CADDY_PORT=${CADDY_PORT:-8443}
+      - CADDY_AUTH=${CADDY_AUTH:-}
     volumes:
       - smarthome_app_conf:/files/homeassistant
       - app_conf:/config
